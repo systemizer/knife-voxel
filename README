@@ -1,15 +1,8 @@
 = Introduction =
 
-knife-voxel is a plugin for the tool 'knife', part of the configuration
-management system 'chef'.   http://www.opscode.com/.   It allows you to
-provision Voxel dot Net (www.voxel.net) cloud instances (physical as
-well as virtual) and then bootstrap them as chef clients.
+knife-voxel is a plugin for the tool 'knife', part of the configuration management system 'chef'.   http://www.opscode.com/.   It allows you to provision Voxel dot Net (www.voxel.net) cloud instances (physical as well as virtual) and then bootstrap them as chef clients.
 
-This plugin is currently a work in progress, although all major
-functions should work as expected.  The command set models Voxel's API
-hAPI (http://api.voxel.net/docs/) .   We depend on the voxel-hapi
-library for access to this API.   This will be replaced with a fog provider
-based backend in the future.
+This plugin is currently a work in progress, although all major functions should work as expected.  The command set models Voxel's API hAPI (http://api.voxel.net/docs/) .   We depend on the voxel-hapi library for access to this API.   This will be replaced with a fog provider based backend in the future.
 
 = Authentication =
 
