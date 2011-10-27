@@ -11,6 +11,12 @@ hAPI (http://api.voxel.net/docs/) .   We depend on the voxel-hapi
 library for access to this API.   This will be replaced with a fog provider
 based backend in the future.
 
+= Authentication =
+
+Authentication can be handled in a few different ways. For each command you can pass --voxel-api-key and --voxel-api-secret with your corresponding hAPI key/secret pair. Or if you prefer, you can utilize your username and password via the --voxel-api-username and --voxel-api-password parameters. Both of these parameter sets can be specified in a knife.rb file, saving you the trouble of entering them each time at the command line. We suggest using a stored authkey/secret pair rather than a username and password when placing these options in knife.rb. The syntax is:
+
+knife[:voxel_api_key] = '01234567890'
+knife[:voxel_api_secret] = '09876543210'
 
 = Usage = 
 
