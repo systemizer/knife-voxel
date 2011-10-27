@@ -11,7 +11,7 @@ class Chef
       end
 
       def run
-        devices = [ ui.color('ID', :bold), ui.color('Name', :bold), ui.color('Type', :bold), ui.color('Status', :bold), ui.color('IP', :bold) ]
+        devices = [ ui.color('ID', :bold), ui.color('Name', :bold), ui.color('Type', :bold), ui.color('Status', :bold), ui.color('Facility', :bold), ui.color('IP', :bold) ]
         statuses = hapi.helper_devices_status
 
         devices_list = hapi.voxel_devices_list['devices']
@@ -33,6 +33,8 @@ class Chef
 
             devices << (statuses.has_key?(device['id']) ? statuses[device['id']] : "N/A")
 
+            devices << ( device.has_key?('location') ? device['location']['facility']['code'] : "N/A")
+
             if device.has_key?('ipassignments')
               ips = device['ipassignments']['ipassignment']
 
@@ -49,7 +51,7 @@ class Chef
           end
         end
 
-        puts ui.list(devices, :columns_across, 5)
+        puts ui.list(devices, :columns_across, 6)
       end
     end
   end

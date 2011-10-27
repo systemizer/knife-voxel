@@ -22,7 +22,8 @@ knife voxel voxcloud create (options)
 knife voxel devices list (options)
 knife voxel voxservers delete DEVICE_ID (options)
 knife voxel voxservers create (options)
-
+knife voxel voxcloud facilities list
+knife voxel voxservers facilities list
 
 = Examples =
 
