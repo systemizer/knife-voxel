@@ -2,25 +2,13 @@ require 'chef/knife/voxel_base'
 
 class Chef
   class Knife
-    class VoxelVoxcloudFacilities < Knife
+    class VoxelVoxcloudFacilitiesList < Knife
       include Knife::VoxelBase
 
-      deps do
-        require 'chef/json_compat'
-        require 'chef/knife/bootstrap'
-        require 'hapi'
-        require 'readline'
-
-        Chef::Knife::Bootstrap.load_deps
-      end
-
-      banner "knife voxel voxcloud facilities"
-
-
+      banner "knife voxel voxcloud facilities list"
 
       def run
-
-        facilities = hapi.voxel_voxservers_facilities_list
+        facilities = hapi.voxel_voxcloud_facilities_list
 
         unless facilities['facilities'].empty?
           facilities['facilities']['facility'].each do |facility|
