@@ -11,7 +11,7 @@ class Chef
       end
 
       def run
-        devices = [ ui.color('ID', :bold), ui.color('Name', :bold), ui.color('Type', :bold), ui.color('Status', :bold), ui.color('Facility', :bold), ui.color('IP', :bold) ]
+        devices = [ ui.color('ID', :bold), ui.color('Name', :bold), ui.color('Type', :bold), ui.color('Status', :bold), ui.color('Facility', :bold), ui.color('Public_IP', :bold), ui.color('Private_IP', :bold) ]
         statuses = hapi.helper_devices_status
 
         devices_list = hapi.voxel_devices_list['devices']
@@ -42,16 +42,18 @@ class Chef
                 ips = [ ips ]
               end
 
-              ip = ips.select { |a| a['type'] == "frontend" }.first
+              ip_frontend = ips.select { |a| a['type'] == "frontend" }.first
+              ip_backend = ips.select { |a| a['type'] == "backend" }.first
 
-              devices << (ip.nil? ? "" : ip["content"])
+              devices << (ip_frontend.nil? ? "" : ip_frontend["content"])
+              devices << (ip_backend.nil? ? "" : ip_backend["content"])
             else
               devices << ""
             end
           end
         end
 
-        puts ui.list(devices, :columns_across, 6)
+        puts ui.list(devices, :columns_across, 7)
       end
     end
   end
