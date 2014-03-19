@@ -52,6 +52,11 @@ class Chef
         :long => "--identity-file IDENTITY_FILE",
         :description => "The SSH identity file used for authentication"
 
+      option :postinstall_script,
+        :short => "-s POSTINSTALL_SCRIPT",
+        :long => "--postinstall-script POSTINSTALL_SCRIPT",
+        :description => "Path to the file you wish to execute upon successful reimage"
+
       option :prerelease,
         :long => "--prerelease",
         :description => "Install the pre-release chef gems"
@@ -129,18 +134,20 @@ class Chef
         $stdout.sync = true
 
         unless @name_args.empty?
+          postinstall_script = File.read(config[:postinstall_script]) if File.exists?(config[:postinstall_script])
           create = hapi.voxel_voxservers_reimage(
             :device_id        => @name_args.first,
             :image_id         => config[:image_id],
             :hostname         => config[:hostname],
-            :swap_space       => config[:swap_size]
+            :swap_space       => config[:swap_size],
+            :postinstall_script => postinstall_script
           )
 
           if create['stat'] == "fail"
             ui.error(create['err']['msg'])
           else
             sleep 2
-            
+
             device = hapi.voxel_devices_list( :device_id => create['device']['id'], :verbosity => 'extended' )
 
             if device['stat'] == "fail"
